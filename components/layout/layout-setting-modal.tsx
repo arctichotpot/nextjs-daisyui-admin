@@ -1,15 +1,24 @@
 "use client";
 
-interface HTMLElement {
-  showModal(): void;
-}
+import { useTheme } from "@/app/theme-provider";
+import { TabBox } from "../tab-box";
+
+// interface HTMLElement {
+//   showModal(): void;
+// }
 
 export const LayougSettingModal = () => {
+  const { theme, layout, updateTheme, updateLayout } = useTheme();
+
   const showModal = () => {
     const my_modal_2: HTMLDialogElement = document.getElementById(
       "my_modal_2"
     ) as HTMLDialogElement;
     my_modal_2.showModal();
+  };
+
+  const handleChangeLayout = () => {
+    updateLayout("left-with-icon");
   };
 
   return (
@@ -40,7 +49,30 @@ export const LayougSettingModal = () => {
         <div className="modal-box">
           <h3 className="font-bold text-lg">Layout Settings</h3>
           <div className="py-4">
-            <p>Press ESC key or click outside to close</p>
+            {theme}
+            {layout}
+
+            <div>
+              <h1>Layout</h1>
+
+              <TabBox
+                value={layout}
+                onChange={updateLayout}
+                items={[
+                  { label: "Left", value: "left" },
+                  { label: "Top", value: "top" },
+                  { label: "Left With Icon", value: "left-with-icon" },
+                ]}
+              ></TabBox>
+            </div>
+
+            <button className="btn" onClick={handleChangeLayout}>
+              Button
+            </button>
+            <button className="btn btn-neutral">Neutral</button>
+            <button className="btn btn-primary">Primary</button>
+            <button className="btn btn-secondary">Secondary</button>
+            <button className="btn btn-accent">Accent</button>
           </div>
         </div>
         <form method="dialog" className="modal-backdrop">

@@ -1,4 +1,11 @@
-import { PropsWithChildren, createContext } from "react";
+"use client"
+
+import React, {
+  createContext,
+  PropsWithChildren,
+  useState,
+  useContext,
+} from "react";
 
 const ALL_THEME_COLORS = [
   "light",
@@ -35,28 +42,59 @@ const ALL_THEME_COLORS = [
   "sunset",
 ];
 
-type ThemeConfigType = {
-  layout: "left" | "top" | "left-with-icon";
-  color: (typeof ALL_THEME_COLORS)[number];
+type LayoutType = "left" | "top" | "left-with-icon";
+
+type ThemeContextType = {
+  theme: string;
+  layout: LayoutType;
+  setTheme: (theme: string) => void;
+  setLayout: (layout: LayoutType) => void;
 };
 
-const defaultThemeConfig: ThemeConfigType = {
+export const ThemeContext = createContext<ThemeContextType>({
+  theme: "light",
   layout: "left",
-  color: "light",
-};
 
-export const ThemeContext = createContext<ThemeConfigType>(defaultThemeConfig);
+  setTheme: () => {},
+  setLayout: () => {},
+});
 
-export const ThemeProvider = ({
-  children,
-}: {
-  children: PropsWithChildren;
-}) => {
-  // const
+export const ThemeProvider = ({ children }: PropsWithChildren<{}>) => {
+  const [theme, setTheme] = useState<string>("light");
+  const [layout, setLayout] = useState<LayoutType>("left");
+
+  const toggleTheme = (value: string) => {
+    setTheme(value);
+  };
+
+  const toggleLayout = (value: LayoutType) => {
+    setLayout(value);
+  };
 
   return (
-    <ThemeContext.Provider value={defaultThemeConfig}>
-      <>{children}</>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        layout,
+        setLayout,
+        setTheme,
+      }}
+    >
+      {children}
     </ThemeContext.Provider>
   );
+};
+
+export const useTheme = () => {
+  const { setTheme, setLayout, theme, layout } = useContext(ThemeContext);
+
+  const updateTheme = (newTheme: string) => {
+    setTheme(newTheme);
+  };
+
+  const updateLayout = (newLayout: LayoutType) => {
+    setLayout(newLayout);
+  };
+
+  return { updateTheme, updateLayout, theme, layout };
 };
