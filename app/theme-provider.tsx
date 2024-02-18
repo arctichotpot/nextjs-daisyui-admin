@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, {
   createContext,
@@ -62,14 +62,6 @@ export const ThemeContext = createContext<ThemeContextType>({
 export const ThemeProvider = ({ children }: PropsWithChildren<{}>) => {
   const [theme, setTheme] = useState<string>("light");
   const [layout, setLayout] = useState<LayoutType>("left");
-
-  const toggleTheme = (value: string) => {
-    setTheme(value);
-  };
-
-  const toggleLayout = (value: LayoutType) => {
-    setLayout(value);
-  };
 
   return (
     <ThemeContext.Provider

@@ -49,11 +49,10 @@ export const LayougSettingModal = () => {
         <div className="modal-box">
           <h3 className="font-bold text-lg">Layout Settings</h3>
           <div className="py-4">
-            {theme}
-            {layout}
+    
 
             <div>
-              <h1>Layout</h1>
+              <h1 className="mb-2">Layout</h1>
 
               <TabBox
                 value={layout}
@@ -66,13 +65,7 @@ export const LayougSettingModal = () => {
               ></TabBox>
             </div>
 
-            <button className="btn" onClick={handleChangeLayout}>
-              Button
-            </button>
-            <button className="btn btn-neutral">Neutral</button>
-            <button className="btn btn-primary">Primary</button>
-            <button className="btn btn-secondary">Secondary</button>
-            <button className="btn btn-accent">Accent</button>
+        
           </div>
         </div>
         <form method="dialog" className="modal-backdrop">

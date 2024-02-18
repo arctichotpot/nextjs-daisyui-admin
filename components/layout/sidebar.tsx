@@ -165,7 +165,7 @@ const MenuItem = ({ label, path, icon, children }: MenuItemsType) => {
 
 const Menu = ({ items }: { items: MenuItemsType[] }) => {
   return (
-    <ul className="menu bg-base-200 w-56 rounded-box h-full overflow-y-auto">
+    <ul className="menu bg-base-200 w-56  h-full overflow-y-auto">
       {items.map((item, index) => (
         <MenuItem key={index} {...item} />
       ))}

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import { ThemeProvider } from "./theme-provider";
+import { RouteListener } from "./route-listener";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="cmyk">
       <body className={inter.className}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <RouteListener>
+          <ThemeProvider>{children}</ThemeProvider>
+        </RouteListener>
       </body>
     </html>
   );
